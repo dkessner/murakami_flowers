@@ -21,7 +21,7 @@ let lastTouch = 0;
 
 
 function mousePressed() {
-    if (millis() - lastTouch < 1000)
+    if (millis() - lastTouch < 100)
         return;
 
     translate(mouseX, mouseY);
