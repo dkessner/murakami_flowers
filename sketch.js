@@ -29,14 +29,26 @@ function drawFlower(petalRadius)
     drawFace(petalRadius);
 }
 
-function drawEye(faceWidth)
+function drawEye(faceWidth, leftEye = false)
 {
     push();
     fill(0);
     noStroke();
-    rotate(radians(-55));
+
+    if (leftEye) {
+        rotate(radians(-125));
+    } else{
+        rotate(radians(-55));
+    }
+
     translate(faceWidth/3, 0);
-    rotate(radians(110));
+
+    if (leftEye) {
+        rotate(radians(-110));
+    } else {
+        rotate(radians(110));
+    }
+
     let eyeWidth = faceWidth*.18;
     ellipse(0, 0, eyeWidth, eyeWidth*.7);
 
@@ -53,19 +65,18 @@ function drawFace(faceWidth)
     circle(0, 0, faceWidth);
 
     // eyes
-    drawEye(faceWidth);    
-    push();
-    scale(-1, 1);
-    drawEye(faceWidth);    
-    pop();
+
+    drawEye(faceWidth);
+    drawEye(faceWidth, leftEye=true);
 
     // mouth
 
     let smileX = faceWidth/3;
-    let smileY = faceWidth * .10;
+    let smileY = faceWidth * .05;
 
-    fill(255, 0, 0);
     strokeWeight(5);
+    fill(0, 100, 100);
+
     beginShape();
     curveVertex(-smileX, -faceWidth*1.3);
     curveVertex(-smileX, -smileY);
@@ -77,7 +88,7 @@ function drawFace(faceWidth)
     beginShape();
     curveVertex(-smileX, faceWidth*.1);
     curveVertex(-smileX, -smileY);
-    curveVertex(0, -smileX*.5);
+    curveVertex(0, -smileX*.35);
     curveVertex(smileX, -smileY);
     curveVertex(smileX, faceWidth*.1);
     endShape();
@@ -90,12 +101,18 @@ function drawPetals(radius)
     stroke(0);
     strokeWeight(3);
 
+    let colorIndex = 2;
+
     for (let i=0; i<12; i++) {
         push();
         rotate(i*PI/6);
-        fill(i, 100, 100);
+        fill(colorIndex, 100, 100);
         drawPetal(radius);
         pop();
+
+        colorIndex++;
+        if (colorIndex >= 12)
+            colorIndex = 0;
     }
 }
 
