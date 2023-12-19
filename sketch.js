@@ -3,7 +3,7 @@
 
 
 function setup() {
-    createCanvas(800, 800);
+    createCanvas(windowWidth, windowHeight);
     colorMode(HSB, 12, 100, 100);
 
     background(0);
