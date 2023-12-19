@@ -3,7 +3,8 @@
 
 
 function setup() {
-    createCanvas(windowWidth, windowHeight);
+    //createCanvas(windowWidth, windowHeight);
+    createCanvas(displayWidth, displayHeight);
     colorMode(HSB, 12, 100, 100);
 
     background(0);
@@ -16,10 +17,16 @@ function draw() {
 }
 
 
+let lastTouch = 0;
+
+
 function mousePressed() {
+    if (millis() - lastTouch < 1000)
+        return;
 
     translate(mouseX, mouseY);
     drawFlower(random(10, 100));
+    lastTouch = millis();
 }
 
 
